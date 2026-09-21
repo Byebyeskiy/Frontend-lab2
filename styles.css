@@ -1,0 +1,225 @@
+/* =========================================================
+   CSS VARIABLES — усі кольори, шрифти й відступи в одному місці
+   ========================================================= */
+:root {
+  --color-primary: #2563eb;
+  --color-primary-hover: #1d4ed8;
+  --color-surface: #111827;      /* фон картки (темна тема під макет) */
+  --color-background: #0b1120;   /* фон секції */
+  --color-text-main: #f8fafc;
+  --color-text-muted: #94a3b8;
+  --color-border: #1e293b;
+  --color-accent: #f59e0b;
+
+  --font-family-base: 'Inter', sans-serif;
+  --font-size-base: 16px;
+  --font-size-h1: 2.5rem;
+  --font-size-h2: 1.5rem;
+  --font-size-small: 0.875rem;
+
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --border-radius: 12px;
+}
+
+/* =========================================================
+   BOX MODEL — глобально border-box, щоб padding/border
+   не змінювали задану ширину елементів
+   ========================================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* =========================================================
+   INHERITANCE — шрифт і базовий колір задаються ОДИН РАЗ
+   на body, всі нащадки (h2, p, li, span...) успадковують їх,
+   тому в картках/заголовках нижче font-family не дублюється
+   ========================================================= */
+body {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  color: var(--color-text-main);
+  background: var(--color-background);
+}
+
+/* =========================================================
+   Контейнер і секція
+   ========================================================= */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+.pricing {
+  padding: var(--spacing-xl) 0;
+}
+
+.pricing__header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.pricing__title {
+  font-size: var(--font-size-h1);
+  margin-bottom: var(--spacing-sm);
+}
+
+.pricing__subtitle {
+  color: var(--color-text-muted);
+}
+
+/* =========================================================
+   Сітка карток: ряд на широкому екрані, стовпчик на мобільному
+   ========================================================= */
+.pricing__grid {
+  display: flex;
+  gap: var(--spacing-lg);
+  align-items: stretch;
+}
+
+/* =========================================================
+   REUSABLE / DRY — одна базова картка .pricing-card,
+   всі три тарифи використовують один і той самий набір правил.
+   Відмінність Pro-картки вирішена МОДИФІКАТОРОМ, а не новим класом.
+   ========================================================= */
+.pricing-card {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-lg);
+}
+
+.pricing-card__name {
+  font-size: var(--font-size-small);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.pricing-card__price {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: var(--spacing-lg);
+}
+
+.pricing-card__amount {
+  font-size: var(--font-size-h1);
+  font-weight: 700;
+}
+
+.pricing-card__period {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-small);
+}
+
+.pricing-card__features {
+  list-style: none;
+  margin-bottom: var(--spacing-lg);
+  flex-grow: 1;
+}
+
+.pricing-card__features li {
+  padding: var(--spacing-sm) 0;
+  color: var(--color-text-main);
+}
+
+/* Псевдоелемент замість зображення-галочки — менше розмітки, легко міняти колір через var() */
+.pricing-card__features li::before {
+  content: "✓";
+  color: var(--color-primary);
+  font-weight: 700;
+  margin-right: var(--spacing-sm);
+}
+
+/* =========================================================
+   SPECIFICITY — модифікатор виділеної (Pro) картки.
+   Один клас-модифікатор (0,0,1,0) додається ДРУГИМ у розмітці,
+   тому в каскаді він природно перекриває базові властивості
+   .pricing-card без жодних !important чи довгих ланцюжків
+   ========================================================= */
+.pricing-card--featured {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 1px var(--color-primary);
+  transform: scale(1.03);
+}
+
+.pricing-card__badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-primary);
+  color: #fff;
+  font-size: var(--font-size-small);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 4px var(--spacing-md);
+  border-radius: 999px;
+}
+
+/* =========================================================
+   REUSABLE BUTTON — один базовий клас .btn з двома модифікаторами.
+   Спільні властивості (padding, radius, font, border-width) описані
+   один раз; модифікатори міняють лише колір/фон
+   ========================================================= */
+.btn {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  font-family: inherit;      /* явне успадкування — <a> не бере шрифт body сам по собі */
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-primary);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--color-primary);
+}
+
+.btn--outline:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.btn--primary:hover {
+  background: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+
+/* =========================================================
+   RESPONSIVE — до 768px картки стають у стовпчик
+   ========================================================= */
+@media (max-width: 768px) {
+  .pricing__grid {
+    flex-direction: column;
+  }
+
+  .pricing-card--featured {
+    transform: none; /* на мобільному масштабування зайве */
+  }
+}
