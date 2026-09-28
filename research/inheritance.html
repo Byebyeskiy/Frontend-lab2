@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Дослідження: Inheritance</title>
+<style>
+  body {
+    font-family: Georgia, serif;
+    color: #2b6cb0; /* синій */
+    padding: 40px;
+  }
+
+  /* Кнопки та посилання за замовчуванням НЕ успадковують font-family і color
+     від body — у них є свої вбудовані (user-agent) стилі браузера */
+
+  .fixed-link {
+    color: inherit;      /* явно кажемо: успадкуй колір від батька */
+    font-family: inherit; /* явно кажемо: успадкуй шрифт від батька */
+  }
+
+  .fixed-button {
+    color: inherit;
+    font-family: inherit;
+  }
+</style>
+</head>
+<body>
+
+  <h2>Експеримент з Inheritance</h2>
+
+  <p>Це звичайний параграф — успадкував шрифт і колір від body автоматично.</p>
+
+  <p>
+    <a href="#">Це посилання (без виправлення)</a> —
+    подивись, чи однаковий у нього шрифт/колір з текстом параграфа.
+  </p>
+
+  <p>
+    <a href="#" class="fixed-link">Це посилання (з inherit)</a> —
+    тепер шрифт і колір збігаються з параграфом.
+  </p>
+
+  <p>
+    <button>Кнопка (без виправлення)</button>
+    <button class="fixed-button">Кнопка (з inherit)</button>
+  </p>
+
+</body>
+</html>

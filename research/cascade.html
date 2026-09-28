@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Дослідження: Cascade</title>
+
+<!-- 1) Зовнішній файл підключається ПЕРШИМ -->
+<link rel="stylesheet" href="cascade-external.css">
+
+<!-- 2) Внутрішній <style> підключається ДРУГИМ -->
+<style>
+  /* Три класи з ОДНАКОВОЮ специфічністю (0,0,1,0 кожен) */
+  .rule-a { color: blue; }
+  .rule-b { color: green; }
+  .rule-c { color: purple; }
+</style>
+
+</head>
+<body style="font-family: sans-serif; padding: 40px;">
+
+  <h2>Експеримент з Cascade</h2>
+
+  <!-- Елемент має всі три класи одночасно -->
+  <p class="rule-a rule-b rule-c">
+    Який колір переможе? 
+  </p>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Дослідження: Specificity</title>
+<style>
+  /* Специфічність (0,0,0,1) — селектор тегу */
+  p {
+    color: black;
+  }
+
+  /* Специфічність (0,0,1,0) — селектор класу */
+  .text {
+    color: blue;
+  }
+
+  /* Ланцюжок із 4 класів: специфічність (0,0,4,0) */
+  .text.one.two.three {
+    color: orange;
+  }
+
+  /* Специфічність (0,1,0,0) — селектор ID.
+     (0,1,0,0) ЗАВЖДИ більше за (0,0,N,0) при будь-якому N,
+     бо специфічність порівнюється по-розрядно зліва направо,
+     як число: 1 клас в розряді ID вже перевищує будь-яку кількість класів */
+  #main-text {
+    color: green;
+  }
+</style>
+</head>
+<body style="font-family: sans-serif; padding: 40px;">
+
+  <h2>Експеримент зі Specificity</h2>
+
+  <p id="main-text" class="text one two three">
+    Який колір переможе? 
+  </p>
+
+</body>
+</html>

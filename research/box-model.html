@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Дослідження: Box Model</title>
+<style>
+  body {
+    font-family: sans-serif;
+    padding: 40px;
+    display: flex;
+    gap: 60px;
+  }
+
+  /* Обидва блоки мають ОДНАКОВІ width, height, padding, border */
+  .box {
+    width: 200px;
+    height: 100px;
+    padding: 20px;
+    border: 10px solid #333;
+    background: #a3d5ff;
+  }
+
+  .content-box {
+    box-sizing: content-box; /* за замовчуванням у браузера */
+  }
+
+  .border-box {
+    box-sizing: border-box;
+  }
+
+  .label {
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+
+  <div>
+    <div class="label">content-box (width/height = тільки контент)</div>
+    <div class="box content-box">200x100</div>
+  </div>
+
+  <div>
+    <div class="label">border-box (width/height = контент + padding + border)</div>
+    <div class="box border-box">200x100</div>
+  </div>
+
+</body>
+</html>

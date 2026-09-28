@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Дослідження: CSS Variables</title>
+<style>
+  /* Глобальні змінні, доступні всьому документу */
+  :root {
+    --color-primary: #2b6cb0;
+    --color-bg: #f5f7fa;
+    --color-text: #1a202c;
+    --spacing: 16px;
+    --radius: 8px;
+  }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: sans-serif;
+    padding: 40px;
+  }
+
+  .card {
+    background: white;
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius);
+    padding: var(--spacing);
+    margin-bottom: var(--spacing);
+  }
+
+  .card h3 {
+    color: var(--color-primary);
+    margin-top: 0;
+  }
+
+  /* Локальне перевизначення змінних всередині конкретного класу.
+     Всі властивості, що використовують var(--color-primary) і var(--color-bg)
+     ВСЕРЕДИНІ .dark-card, автоматично отримають нові значення —
+     завдяки каскадній області видимості (scope) CSS-змінних */
+  .dark-card {
+    --color-primary: #f6ad55;
+    --color-bg: #1a202c;
+    background: var(--color-bg);
+    color: white;
+  }
+</style>
+</head>
+<body>
+
+  <h2>Експеримент з CSS Variables</h2>
+
+  <div class="card">
+    <h3>Звичайна картка</h3>
+    <p>Використовує глобальні змінні з :root напряму.</p>
+  </div>
+
+  <div class="card dark-card">
+    <h3>Темна картка (перевизначені змінні)</h3>
+    <p>Ті самі властивості (border, color), але значення --color-primary
+       і --color-bg локально перевизначені всередині .dark-card.</p>
+  </div>
+
+</body>
+</html>
